@@ -55,7 +55,7 @@ new_window pixel 2
 
 # Set inner/outer gaps
 gaps inner 6
-gaps outer 3
+gaps outer 0
 
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
@@ -272,8 +272,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_br
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_down
 
 # gradular volume control
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+# bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+# bindsym $mod+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
 
 # mute
 #bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle && killall -USR1 i3blocks
@@ -306,15 +306,15 @@ bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
+set $ws1 "1"
+set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9:"
+set $ws9 "9"
 set $ws10 "10"
 
 # use workspaces on different displays:
@@ -327,8 +327,8 @@ set $ws10 "10"
 #workspace $ws5 output HDMI-0
 
 # bind program to workspace and focus to them on startup:
-assign [class="kitty"] $ws1
-# assign [class="(?i)firefox"] $ws2
+assign [class="kitty"] $ws4
+assign [class="(?i)firefox"] $ws5
 # assign [class="Thunar"] $ws8
 assign [class="thunderbird"] $ws9
 # assign [class="TelegramDesktop"] $ws5
@@ -337,7 +337,7 @@ assign [class="thunderbird"] $ws9
 # for_window [class=Xfce4-terminal] focus
 # for_window [class=(?i)firefox] focus
 # for_window [class=Thunar] focus
-for_window [class=Thunderbird] focus
+# for_window [class=Thunderbird] focus
 # for_window [class=TelegramDesktop] focus
 
 ##############
@@ -515,70 +515,75 @@ client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
 client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 
 ############################################
+# bar settings polybar					   #
+############################################
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+############################################
 # bar settings (input comes from i3blocks) #
 ############################################
 
-# Start i3bar to display a workspace bar
-# (plus the system information i3status finds out, if available)
-bar {
-		font pango: Noto Sans Regular 10
-		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	    	position bottom
-#	    	i3bar_command i3bar --transparency
-# it could be that you have no primary display set: set one (xrandr --output <output> --primary)
-# reference: https://i3wm.org/docs/userguide.html#_tray_output
-		    #tray_output primary
-		    tray_padding 0
-
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-strip_workspace_numbers yes
-##strip_workspace_name no
-
-		    colors {
-		    separator          $purple
-		    background         $darkgrey
-		    statusline         $white
-#                          		border 		        bg		txt		indicator
-		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
-		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
-	}
-}
-
-# you can add different bars for multidisplay setups on each display:
-# set output HDMI-0 to the display you want the bar, --transparency can be set.
-# Transparency needs rgba color codes to be used where the last two letters are the transparency factor see here:
-# https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-# #08052be6 --> e6=90%
-
+# # Start i3bar to display a workspace bar
+# # (plus the system information i3status finds out, if available)
 # bar {
-#	font pango: Noto Sans Regular 10
-#	status_command i3blocks -c ~/.config/i3/i3blocks-2.conf
-#	i3bar_command i3bar --transparency
-#	output HDMI-0
-#	position bottom
+# 		font pango: Noto Sans Regular 10
+# 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
+# 	    	position bottom
+# #	    	i3bar_command i3bar --transparency
+# # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
+# # reference: https://i3wm.org/docs/userguide.html#_tray_output
+# 		    #tray_output primary
+# 		    tray_padding 0
 #
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-#strip_workspace_numbers yes
-##strip_workspace_name no
+# # When strip_workspace_numbers is set to yes,
+# # any workspace that has a name of the form
+# # “[n][:][NAME]” will display only the name.
+# strip_workspace_numbers yes
+# ##strip_workspace_name no
 #
-#	colors {
-#		separator          $purple
-#		background         $darkbluetrans
-#        	statusline         $white
-#					border		bg		txt		indicator
-#		focused_workspace	$lighterblue	$lighterblue	$darkblue	$purple
-#		active_workspace	$lightdblue	$lightdblue	$darkblue	$purple
-#		inactive_workspace	$darkblue	$darkblue	$lightdblue	$purple
-#		urgent_workspace	$urgentred	$urgentred	$white		$purple
-#	}
-#}
-
+# 		    colors {
+# 		    separator          $purple
+# 		    background         $darkgrey
+# 		    statusline         $white
+# #                          		border 		        bg		txt		indicator
+# 		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
+# 		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
+# 		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
+# 		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
+# 	}
+# }
+#
+# # you can add different bars for multidisplay setups on each display:
+# # set output HDMI-0 to the display you want the bar, --transparency can be set.
+# # Transparency needs rgba color codes to be used where the last two letters are the transparency factor see here:
+# # https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
+# # #08052be6 --> e6=90%
+#
+# # bar {
+# #	font pango: Noto Sans Regular 10
+# #	status_command i3blocks -c ~/.config/i3/i3blocks-2.conf
+# #	i3bar_command i3bar --transparency
+# #	output HDMI-0
+# #	position bottom
+# #
+# # When strip_workspace_numbers is set to yes,
+# # any workspace that has a name of the form
+# # “[n][:][NAME]” will display only the name.
+# #strip_workspace_numbers yes
+# ##strip_workspace_name no
+# #
+# #	colors {
+# #		separator          $purple
+# #		background         $darkbluetrans
+# #        	statusline         $white
+# #					border		bg		txt		indicator
+# #		focused_workspace	$lighterblue	$lighterblue	$darkblue	$purple
+# #		active_workspace	$lightdblue	$lightdblue	$darkblue	$purple
+# #		inactive_workspace	$darkblue	$darkblue	$lightdblue	$purple
+# #		urgent_workspace	$urgentred	$urgentred	$white		$purple
+# #	}
+# #}
+#
 #####################################
 # Application menu handled by rofi: #
 #####################################
