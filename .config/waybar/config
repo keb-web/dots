@@ -1,0 +1,106 @@
+{
+    "layer": "top",
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock"],
+    "modules-right": [ "group/expand", "tray"],
+    "sway/window": {
+        "max-length": 50
+	 
+    },
+	"sway/workspaces": {
+		// "format": "{icon}",
+		// "format-icons": {
+		// 	"active": "",
+		// 	 "default": "",
+		// 	"empty": ""
+		// },
+		"persistent-workspaces": {
+			"*": [ 1, 2, 3, 4, 5 ]
+		}
+	},
+	"clock": {
+		"format": "{:%A %I:%M:%S %p} ",
+		"format-alt": "{:%d %B W%V %Y}",
+		"interval": 1,   
+		"tooltip-format": "<tt>{calendar}</tt>",
+		"calendar": {
+			"format": {
+				"today": "<span color='#9dd4ad'><b>{}</b></span>"
+			}
+		},
+		"actions": {
+			"on-click": "toggle"
+		}
+	},
+	"bluetooth": {
+		"format": " {status}",
+		"format-disabled": "", // an empty format will hide the module
+		"format-connected": " {num_connections} connected",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+	},
+	"memory": {
+		"interval": 30,
+		"format": "{}% ",
+		"max-length": 10
+	},
+	"network": {
+		"format-wifi": "",
+		"format-ethernet":"",
+		"format-disconnected": "",
+		"tooltip-format-disconnected": "Error",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+		"tooltip-format-ethernet": "{ifname} 🖧 ",
+		"on-click": "kitty nmtui"
+	},
+	"bluetooth": {
+		"format-on": "󰂯",
+		"format-off": "BT-off",
+		"format-disabled": "󰂲",
+		"format-connected-battery": "{device_battery_percentage}% 󰂯",
+		"format-alt": "{device_alias} 󰂯",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
+		"on-click": "blueman-manager"
+	},
+	 "cpu": {
+		"format": "󰻠",
+		"tooltip": true
+	},
+	"memory": {
+		"format": ""
+	},
+	"temperature": {
+		"critical-threshold": 80,
+		"format": ""
+	},
+	"custom/expand": {
+		"format": "",
+		"tooltip": false
+	},
+	"group/expand": {
+		"orientation": "horizontal",
+		"drawer": {
+			"transition-duration": 600,
+			"transition-to-left": true,
+			"click-to-reveal": true
+		},
+		"modules": ["custom/expand", "cpu", "memory", "temperature", "disk", "network", "bluetooth", "custom/endpoint"]
+	},
+    "custom/endpoint":{
+		"format": "|",
+		"tooltip": false
+	},
+	"disk": {
+		"interval": 30,
+		"format": "{specific_free:0.2f} / {specific_total:0.2f} GB",
+		"unit": "GB"
+	},
+	"tray": {
+		"icon-size": 14,
+		"spacing": 10
+	}
+}
