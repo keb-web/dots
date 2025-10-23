@@ -1,4 +1,4 @@
-neofetch
+fastfetch
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -13,6 +13,9 @@ fi
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+export TERM=xterm-256color
+
+export EDITOR="nvim"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -111,7 +114,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+alias config='/usr/bin/git --git-dir=/home/keb/.cfg/ --work-tree=/home/keb'
+alias kvim='NVIM_APPNAME=kebvim nvim' # LazyVim
+alias chad='NVIM_APPNAME=chad nvim' # chad
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/keb/.dart-cli-completion/zsh-config.zsh ]] && . /home/keb/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
