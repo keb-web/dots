@@ -190,7 +190,6 @@ bindsym Print mode $printscreen_mode
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
-
 ##########################################
 # configuration for workspace behaviour: #
 ##########################################
@@ -238,7 +237,8 @@ assign [class="Spotify"] $wsMusic
 #workspace $ws# output VGA-0
 #workspace $ws# output HDMI-0
 # portable monitor
-workspace $ws10 output DisplayPort-1
+workspace $ws10 output DisplayPort-1 mode 2560x1440 @ 170.001 Hz
+
 #############################################
 # autostart applications/services on login: #
 #############################################
@@ -350,7 +350,7 @@ for_window [class="urxvt"] border pixel 1
 # set position of floating window
 for_window [class=".*"] move position center
 
-# make PIP follow between workspaces
+# make jIP follow between workspaces
 for_window [title="Picture-in-Picture"] floating enable, sticky enable, border pixel 1
 
 ######################################
