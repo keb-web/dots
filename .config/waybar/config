@@ -2,26 +2,15 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
-    "modules-right": [ "group/expand", "tray"],
+    "modules-right": [ "group/expand", "custom/cpu-temp", "custom/gpu-temp", "cpu", "memory", "disk", "bluetooth", "network"],
     "sway/window": {
         "max-length": 50
 	 
     },
 	"sway/workspaces": {
-		// "format": "{icon}",
-		// "format-icons": {
-		// 	"active": "",
-		// 	 "default": "",
-		// 	"empty": ""
-		// },
-		"persistent-workspaces": {
-			"*": [ 1, 2, 3, 4, 5 ]
-		}
 	},
 	"clock": {
-		// "format": "{:%A  %I:%M:%S %p    %B %d W%V %Y} ",
-		// "format": "{:%A  %B %d %Y    %I:%M:%S %p  |  W%V}",
-		"format": "{:%A Wk %V/52   %B %d %Y   %I:%M:%S %p}",
+		"format": "{:%A Wk:%V/52   %B %d %Y   %I:%M:%S %p}",
 		"interval": 1,   
 		"tooltip-format": "<tt>{calendar}</tt>",
 		"calendar": {
@@ -33,27 +22,34 @@
 			"on-click": "toggle"
 		}
 	},
-	"bluetooth": {
-		"format": " {status}",
-		"format-disabled": "", // an empty format will hide the module
-		"format-connected": " {num_connections} connected",
-		"tooltip-format": "{controller_alias}\t{controller_address}",
-		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+	"custom/cpu-temp": {
+		"exec": "awk '{printf \"%.1f°F\", ($1/1000*9/5)+32}' /sys/devices/pci0000:00/0000:00:14.0/i2c-3/3-0050/hwmon/hwmon3/temp1_input",
+		"format": "{text}  ",
+		"tooltip": true,
+		"tooltip-format": "CPU",
+		"interval": 5
+	},
+	"custom/gpu-temp": {
+		"exec": "awk '{printf \"%.1f°F\", ($1/1000*9/5)+32}' /sys/devices/pci0000:00/0000:00:08.1/0000:0f:00.0/hwmon/hwmon5/temp1_input",
+		"format": "{text} ",
+		"tooltip": true,
+		"tooltip-format": "GPU",
+		"interval": 5
+	},
+	 "cpu": {
+		"interval": 30,
+		"format": "{}% ",
+		"tooltip": true
 	},
 	"memory": {
 		"interval": 30,
-		"format": "{}% ",
+		"format": "{}%  ",
 		"max-length": 10
 	},
-	"network": {
-		"format-wifi": "",
-		"format-ethernet":"",
-		"format-disconnected": "",
-		"tooltip-format-disconnected": "Error",
-		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-		"tooltip-format-ethernet": "{ifname} 🖧 ",
-		"on-click": "kitty nmtui"
+	"disk": {
+		"interval": 30,
+		"format": "{}%  ",
+		"unit": "GB"
 	},
 	"bluetooth": {
 		"format-on": "󰂯",
@@ -67,16 +63,14 @@
 		"tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
 		"on-click": "blueman-manager"
 	},
-	 "cpu": {
-		"format": "󰻠",
-		"tooltip": true
-	},
-	"memory": {
-		"format": ""
-	},
-	"temperature": {
-		"critical-threshold": 80,
-		"format": ""
+	"network": {
+		"format-wifi": "",
+		"format-ethernet":"",
+		"format-disconnected": "",
+		"tooltip-format-disconnected": "Error",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+		"tooltip-format-ethernet": "{ifname} 🖧 ",
+		"on-click": "kitty nmtui"
 	},
 	"custom/expand": {
 		"format": "",
@@ -89,19 +83,14 @@
 			"transition-to-left": true,
 			"click-to-reveal": true
 		},
-		"modules": ["custom/expand", "cpu", "memory", "temperature", "disk", "network", "bluetooth", "custom/endpoint"]
-	},
-    "custom/endpoint":{
-		"format": "|",
-		"tooltip": false
-	},
-	"disk": {
-		"interval": 30,
-		"format": "{specific_free:0.2f} / {specific_total:0.2f} GB",
-		"unit": "GB"
+		"modules": ["custom/expand", "tray", "custom/endpoint"]
 	},
 	"tray": {
 		"icon-size": 14,
 		"spacing": 10
+	},
+    "custom/endpoint":{
+		"format": "|",
+		"tooltip": false
 	}
 }
