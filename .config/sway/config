@@ -237,7 +237,24 @@ assign [class="Spotify"] $wsMusic
 #workspace $ws# output VGA-0
 #workspace $ws# output HDMI-0
 # portable monitor
-workspace $ws10 output DisplayPort-1 mode 2560x1440 @ 170.001 Hz
+output DP-1 {
+    mode 2560x1440@170.001Hz
+    adaptive_sync off
+    scale 1
+    pos 0 0
+    bg #32302F solid_color
+}
+workspace $ws1 DP-1
+workspace $ws2 DP-1
+workspace $ws3 DP-1
+workspace $ws4 DP-1
+workspace $ws5 DP-1
+workspace $ws6 DP-1
+workspace $ws7 DP-1
+workspace $ws8 DP-1
+workspace $ws9 DP-1
+workspace $ws10 DP-1
+
 
 #############################################
 # autostart applications/services on login: #
@@ -389,6 +406,7 @@ bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun \
 		-config ~/.config/rofi/rofidmenu.rasi
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
 		-config ~/.config/rofi/rofidmenu.rasi
+
 
 ## rofi bindings for window menu ($mod+t /F10 optional disabled)
 
