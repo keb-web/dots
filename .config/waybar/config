@@ -23,21 +23,22 @@
 		}
 	},
 	"custom/cpu-temp": {
-		"exec": "awk '{printf \"%.1f°F\", ($1/1000*9/5)+32}' /sys/devices/pci0000:00/0000:00:14.0/i2c-3/3-0050/hwmon/hwmon3/temp1_input",
-		"format": "{text}  ",
+		"exec": "awk '{printf \"%.1f°F\", ($1/1000*9/5)+32}' /sys/class/hwmon/hwmon3/temp1_input",
+		"format": "{text} ",
 		"tooltip": true,
 		"tooltip-format": "CPU",
-		"interval": 5
+		"interval": 5,
+		"on-click": "kitty btop"
 	},
 	"custom/gpu-temp": {
-		"exec": "awk '{printf \"%.1f°F\", ($1/1000*9/5)+32}' /sys/devices/pci0000:00/0000:00:08.1/0000:0f:00.0/hwmon/hwmon5/temp1_input",
+		"exec": "awk '{printf \"%.1f°F\", ($1/1000*9/5)+32}' /sys/class/hwmon/hwmon5/temp1_input",
 		"format": "{text} ",
 		"tooltip": true,
 		"tooltip-format": "GPU",
 		"interval": 5
 	},
 	 "cpu": {
-		"interval": 30,
+		"interval": 5,
 		"format": "{}% ",
 		"tooltip": true
 	},
