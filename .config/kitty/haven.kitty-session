@@ -1,0 +1,18 @@
+# Development window
+# AI tab
+new_tab ai
+launch --cwd ~/Development/haven zsh -ic "claude; exec zsh -i"
+# Backend tab
+new_tab be
+launch --cwd ~/Development/haven/haven-be zsh -ic "kvim; exec zsh"
+# Frontend tab
+new_tab fe
+launch --cwd ~/Development/haven/haven-fe zsh -ic "kvim; exec zsh"
+
+# Server window
+new_tab server
+layout splits
+# npm
+launch --var window=npm --location=hsplit --bias=20 --cwd ~/Development/haven/haven-fe zsh -ic "npm run dev; exec zsh"
+# FastAPI
+launch --location=hsplit --bias=80 --cwd ~/Development/haven/haven-be zsh -ic "fastapi dev app/main.py; exec zsh"

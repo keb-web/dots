@@ -1,19 +1,19 @@
 
 
 # BEGIN_KITTY_FONTS
-font_family      family="Ioskeley Mono"
+font_family      family="FiraCode Nerd Font"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
-font_size 11
+font_size 14
 # END_KITTY_FONTS
 
 term xterm-256color
 
-disable_ligatures always
+disable_ligatures never
 
 # include ./onedark.conf
-# include ./kanagawa.conf q	
+# include ./kanagawa.conf
 # include ./everforest.conf
 # include ./frappe.conf
 include ./gruvbox-dark.conf
@@ -28,8 +28,7 @@ allow_remote_control socket-only
 listen_on unix:/tmp/kitty
 shell_integration enabled
 
-copy_on_select yes
-active_tab_foreground   #d5e092
+copy_on_select      yes
 
 mouse_map ctrl+left press ungrabbed,grabbed mouse_click_url
 
@@ -39,11 +38,6 @@ action_alias kitty_scrollback_nvim kitten '/home/keb/.local/share/kebvim/lazy/ki
 map kitty_mod+h kitty_scrollback_nvim
 # Browse output of the last shell command in nvim
 map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
-
-enabled_layouts stack
-map ctrl+[ layout_action decrease_num_full_size_windows
-map ctrl+] layout_action increase_num_full_size_windows
-
 # Show clicked command output in nvim
 mouse_map ctrl+shift+right press ungrabbed combine : mouse_select_command_output : kitty_scrollback_nvim --config ksb_builtin_last_visited_cmd_output
-pli
+
